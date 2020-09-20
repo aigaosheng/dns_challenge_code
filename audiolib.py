@@ -39,8 +39,9 @@ def audioread(path, norm=False, start=0, stop=None, target_level=-25):
         raise ValueError("[{}] does not exist!".format(path))
     try:
         audio, sample_rate = sf.read(path, start=start, stop=stop)
-    except RuntimeError:  # fix for sph pcm-embedded shortened v2
-        print('WARNING: Audio type not supported')
+    except:# RuntimeError:  # fix for sph pcm-embedded shortened v2
+        #print('WARNING: Audio type not supported')
+        raise Exception('WARNING: Audio type not supported. {}'.format(path))
 
     if len(audio.shape) == 1:  # mono
         if norm:
